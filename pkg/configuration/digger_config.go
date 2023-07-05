@@ -47,7 +47,8 @@ func (walker *FileSystemDirWalker) GetDirs(workingDir string) ([]string, error) 
 			}
 			if info.IsDir() {
 				terraformFiles, _ := GetFilesWithExtension(path, ".tf")
-				if len(terraformFiles) > 0 {
+				hclFiles, _ := GetFilesWithExtension(path, "terragrunt.hcl")
+				if len(terraformFiles) > 0 || len(hclFiles) > 0 {
 					dirs = append(dirs, path)
 					return filepath.SkipDir
 				}
